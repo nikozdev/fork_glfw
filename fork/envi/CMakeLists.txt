@@ -6,9 +6,13 @@ project(fork_glfw VERSION 0.0)
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
+# file
+set(vFileRootBase ${CMAKE_SOURCE_DIR}/..)
+set(vFileRootCode ${vFileRootBase}/code)
+set(vFileRootMake ${CMAKE_BINARY_DIR})
 # make
-set(FORCE CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_executable(${PROJECT_NAME} ./main.cpp)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_executable(${PROJECT_NAME} ${vFileRootCode}/Main.cpp)
 # libs
 FetchContent_Declare(pGlfw
   GIT_REPOSITORY "https://github.com/nikozdev/fork_glfw.git"
@@ -21,8 +25,8 @@ target_link_libraries(${PROJECT_NAME} PRIVATE glfw)
 include(CTest)
 enable_testing()
 function(fMakeTest vName vText)
-  add_test(${vName} COMMAND ${PROJECT_NAME} "test ${vName}")
+  add_test(${vName} COMMAND ${vFileRootMake}/${PROJECT_NAME} "test" ${vName})
   set_tests_properties(${vName} PROPERTIES PASS_REGULAR_EXPRESSION ${vText})
 endfunction(fMakeTest)
-fMakeTest(HelloWorld "HelloWorld")
-fMakeTest(GlfwWindowCreate "GlfwWindowCreateSucceess")
+fMakeTest(HelloWorld "=HelloWorld")
+fMakeTest(GlfwWindow "GlfwWindow_Success")
