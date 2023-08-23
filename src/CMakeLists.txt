@@ -398,3 +398,4 @@ if (GLFW_INSTALL)
             LIBRARY DESTINATION "${CMAKE_INSTALL_LIBDIR}")
 endif()
 
+add_library(pGlfw::lGlfw ALIAS glfw)

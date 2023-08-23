@@ -3,6 +3,4 @@
 ## the fork purpose
 - making sure this can be installed and used on primary platforms
 ## changelog
-- none
-## metainfo
-- v0.0
+- added pGlfw::lGlfw alias
